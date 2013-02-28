@@ -1,0 +1,75 @@
+<h1>EDIT EMPLOYEE DETAILS</h1>
+
+<%= form_tag :action => :create do %>
+	<div class="form_field">
+		<h4>Employee ID</h4>
+	    <%= text_field "employees","employees_id", :value => @employee.employees_id %>
+	</div>
+	<div class="form_field">
+		<h4>Employee Name</h4>
+	    <%= text_field "employees","name", :value => @employee.name %>
+	</div>
+	</div>
+		<div class="form_field">
+		<h4>Date Of Birth</h4>
+	    <%= date_select("employees" , "dob", :start_year => 1950, :end_year => 2020, :order => [:day,:month, :year],:use_short_month => true, :value => @dob) %>
+	</div>
+	<div class="form_field">
+		<h4>ADDRESS</h4>
+		<table border="0" cellspacing = "2" style="text-align:left;">
+			<tr>
+				<th><h6>ADDRESS LINE 1</h6></th>
+				<td><%= text_field "employees","adl1", :value => @addr.addressLine1%></td>
+			</tr>
+			<tr>
+				<th><h6>ADDRESS LINE 2</h6></th>
+				<td><%= text_field "employees","adl2", :value => @addr.addressLine2%></td>
+			</tr>
+			<tr>
+				<th><h6>CITY</h6></th>
+				<td><%= text_field "employees","city", :value => @addr.city%></td>
+			</tr>
+			<tr>
+				<th><h6>STATE</h6></th>
+				<td><%= text_field "employees","state", :value => @addr.state%></td>
+			</tr>
+			<tr>
+				<th><h6>PINCODE</h6></th>
+				<td><%= text_field "employees","pin", :value => @addr.pincode%></td>
+			</tr>
+	    </table>
+	</div>
+	<div class="form_field">
+		<h4>Employee Email</h4>
+	    <%= text_field "employees","email", :value => @employee.email %>
+	</div>
+	<div class="form_field">
+		<h4>Department Name</h4>
+	    <%= text_field "employees","dname", :value => @dname %>
+	</div>
+	<div class="form_field">
+		<h4>Role Name</h4>
+	    <%= text_field "employees","rname", :value => @rname %>
+	</div>
+	<div class="form_field">
+		<h4>Employee Level</h4>
+	    <%= text_field "employees","level", :value => @employee.level %>
+	</div>
+	<div class="form_field">
+		<h4>Reporting Manager Name</h4>
+	    <%= text_field "employees","mname",:value => @mname %>
+	</div>
+	<div class="form_field">
+		<h4>Is Employee a manager ?&nbsp;</h4>
+		<h6><%= radio_button_tag "ismanager","TRUE"%>YES</h6>
+		<h6><%= radio_button_tag "ismanager","FALSE"%>NO</h6>
+	</div>
+	<div class="submit_form">
+		<br/><%= submit_tag 'EDIT EMPLOYEE',data: { confirm: "Are you sure?"}%><br/>
+	</div>
+	<%= hidden_field_tag "operation","update" %>
+	<%= hidden_field_tag "id",@employee.id %>
+<% end %>
+<br/>
+<%= flash[:message] %>
+

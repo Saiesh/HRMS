@@ -1,0 +1,119 @@
+<html>
+<head>
+<script type="text/javascript">
+	function deleteEmployee(id)
+	{
+		con = confirm("Are you sure you want to delete?")
+		if (con == true)
+		{
+			$.getJSON("/destroy?empid="+id,function(data)
+			{
+				if (data["result"] == "success")
+				{
+					location.reload(true);
+				}
+			    else
+			    	alert("Sorry! Unable to delete.");
+			});
+		}
+	}
+</script>
+<style type="text/css">
+	.title
+	{
+		text-shadow:2px 1px 2px GREY;
+		float:left;
+		display: inline;
+		width:55%;
+		margin:15px;
+	}
+
+	.table
+	{
+		padding:0px;
+		margin:15px;
+		text-align: center;
+		border-radius:6px 6px 6px 6px;
+		border:2px SOLID #222222;
+		box-shadow:3px 3px 3px GREY;
+	}
+
+	.tableHeader
+	{
+		border:2px SOLID RED;
+		margin:2px;
+		background-color:GREY;
+		padding:20px
+	}
+
+	.iconHome
+	{
+		float: right;
+		display:inline;
+		width:15%;
+		margin:10px;
+	}
+
+	.iconAdd
+	{
+		float: right;
+		display:inline;
+		width:15%;
+		margin:10px;
+	}
+
+	.container
+	{
+		float:left;
+		display: inline;
+		width:40%;
+	}
+
+	.header
+	{
+		width:100%;
+		display:inline-block;
+	}
+</style>
+</head>
+<body>
+<div class="header">
+	<h1 class="title"> EMPLOYEE DETAILS </h1>
+	<div class="container">
+		<%= link_to image_tag("add.png", :width => 50, :height => 50, :class => "iconHome"), :action => :newemployee %>
+		<%= link_to image_tag("home.jpg", :width => 50, :height => 50, :class => "iconAdd"), :action => :home %>
+	</div>
+</div>
+<hr/>
+<% if @employee.blank? %>
+	<h2> Oops! Unable to find any employee with given id.</h2>
+<% else %>
+	<table class="table" border="0" cellspacing="0">
+
+		<tr class="tableHeader">
+			<th  style="padding:20px;">ID</th>
+			<th  style="padding:20px;">NAME</th>
+			<th  style="padding:20px;">EMAIL</th>
+			<th  style="padding:20px;">ROLE</th>
+			<th  style="padding:20px;">DEPT</th>
+			<th  style="padding:20px;"></th>
+			<th  style="padding:20px;"></th>
+		</tr>
+		
+		<% role = Employee.where(:employees_id => @employee.employees_id).includes(:roles).first %>
+		<% department = Employee.where(:employees_id => @employee.employees_id).includes(:departments).first %>
+		<tr>
+				<td  style="padding:20px"><%= @employee.employees_id %></td>
+				<td  style="padding:20px"><%= @employee.name%></td>
+				<td  style="padding:20px"><%= @employee.email%></td>
+				<td  style="padding:20px"><%= role.roles.role_name %></td>
+				<td  style="padding:20px"><%= department.departments.description %></td>
+				<td style="padding:10px"><%= link_to(image_tag("edit.jpg", :width => 20, :height => 20),  :action => :editemployee, :empid => @employee.employees_id, :dname => department.departments.description, :rname =>role.roles.role_name) %></td>
+				<td style="padding:10px"><%= link_to(image_tag("del.jpg", :width => 20, :height => 20), :action => :destroy, :empid => @employee.employees_id) %></td>
+		</tr>
+	</table>
+<% end %>
+<br/>
+<%= flash[:message] %>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<html>
+<head>
+</head>
+<body>
+<h1>ENTER EMPLOYEE DETAILS</h1>
+
+<%= form_tag :action => :create do %>
+	<div class="form_field">
+		<h4>Employee ID</h4>
+	    <%= text_field "employees","employees_id", :value => 1%>
+	</div>
+	<div class="form_field">
+		<h4>Employee Name</h4>
+	    <%= text_field "employees","name", :value => "saiesh"%>
+	</div>
+		<div class="form_field">
+		<h4>Date Of Birth</h4>
+	    <%= date_select("employees" , "dob", :start_year => 1950, :end_year => 2020, :order => [:day,:month, :year],:use_short_month => true) %>
+	</div>
+	<div class="form_field">
+		<h4>ADDRESS</h4>
+		<table border="0" cellspacing = "2" style="text-align:left;">
+			<tr>
+				<th><h6>ADDRESS LINE 1</h6></th>
+				<td><%= text_field "employees","adl1", :value => "add line 1"%></td>
+			</tr>
+			<tr>
+				<th><h6>ADDRESS LINE 2</h6></th>
+				<td><%= text_field "employees","adl2", :value => "add line 2"%></td>
+			</tr>
+			<tr>
+				<th><h6>CITY</h6></th>
+				<td><%= text_field "employees","city", :value => "BANGALORE"%></td>
+			</tr>
+			<tr>
+				<th><h6>STATE</h6></th>
+				<td><%= text_field "employees","state", :value => "KARNATAKA"%></td>
+			</tr>
+			<tr>
+				<th><h6>PINCODE</h6></th>
+				<td><%= text_field "employees","pin", :value => "560010"%></td>
+			</tr>
+	    </table>
+	</div>
+	<div class="form_field">
+		<h4>Employee Email</h4>
+	    <%= text_field "employees","email", :value => "s@g.c"%>
+	</div>
+	<div class="form_field">
+		<h4>Department Name</h4>
+	    <%= text_field "employees","dname", :value => "dev"%>
+	</div>
+	<div class="form_field">
+		<h4>Role Name</h4>
+	    <%= text_field "employees","rname", :value => "intern"%>
+	</div>
+	<div class="form_field">
+		<h4>Employee Level</h4>
+	    <%= text_field "employees","level", :value => 10%>
+	</div>
+	<div class="form_field">
+		<h4>Reporting Manager Name</h4>
+	    <%= text_field "employees","mname"%>
+	</div>
+	<div class="form_field">
+		<h4>Is Employee a manager ?&nbsp;</h4>
+		<h6><%= radio_button_tag "ismanager","TRUE", "CHECKED"%>YES</h6>
+		<h6><%= radio_button_tag "ismanager","FALSE"%>NO</h6>
+	</div>
+	<div class="submit_form">
+		<br/><%= submit_tag 'ADD EMPLOYEE'%><br/>
+	</div>
+	<%= hidden_field_tag "operation","new" %>
+<% end %>
+<br/>
+<%= flash[:message] %>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<html>
+<head>
+	<script type="text/javascript">
+	$(function(){
+
+		$("#addEmployee").click(function(){
+			window.location.href = "/newemployee";
+		});
+
+		$("#showEmployees").click(function(){
+			window.location.href = "/showall";
+		});
+
+		$("#showEmployee").click(function(){
+			empId = prompt("Enter Employee ID");
+			empId = parseInt(empId);
+			if (!isNaN(empId))
+					window.location.href = "/displayone?empid="+empId;
+			else
+					alert("Inavlid Employee ID / Cancelled action.")
+		});
+
+		$("#logo").click(function(){
+			window.location.href = "http://www.infibeam.com"
+		})
+	})
+	</script>
+	<style type="text/css">
+		.title
+		{
+			text-shadow:2px 3px 2px GREY;
+			float:right;
+			color:BLACK;
+			margin-right: 15%;
+			text-align: center;
+			height: 100%;
+			display: inline;
+			width: 30%;
+			font-size: 2.5em;
+		}
+
+		.logo
+		{
+			width:40%;
+			margin:10px;
+			float:left;
+			display: inline;
+			cursor:pointer;
+		}
+
+		.img
+		{
+			width:20%;
+			height:50px;
+			margin:15px;
+			float:left;
+			display: inline;
+			/*background-color: RED;*/
+		}
+
+		.name
+		{
+			width:60%;
+			text-shadow: 1px 2px 1px #223344;
+			height:30px;
+			margin:15px;
+			text-align: right;
+			float:left;
+			color:BLACK;
+			display: inline;
+			font-size: 1.3em;
+			font-family: sans-serif;
+			font-weight: bolder;
+			/*background-color: GREEN;*/
+		}
+
+		.header
+		{
+			display: inline-block;
+			width:100%;
+		}
+
+		.box
+		{
+			width:45%;
+			height:50px;
+			margin: 25px;
+			float:left;
+			border:2px GROOVE BLACK;
+			border-radius:6px 6px 6px 6px;
+			box-shadow: 2px 2px 2px #334455;
+			display: inline;
+			cursor:pointer;
+		}
+
+		.box:hover
+		{
+			width:45%;
+			height:50px;
+			margin: 25px;
+			float:left;
+			border:2px GROOVE BLACK;
+			border-radius:6px 6px 6px 6px;
+			box-shadow: 2px 2px 2px GREEN;
+			display: inline;
+			cursor:pointer;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="header">
+		<img class="logo" id="logo" src="http://cdn6.fedobe.com/wp-content/uploads/2012/11/infibeam.jpg" height="100px"/>
+		<h1 class="title">Human Resource Management Solution</h1>
+	</div>
+	<hr/>
+	<div class="box" id="addEmployee">
+		<img class="img" src="http://t2.ftcdn.net/jpg/00/07/53/77/400_F_7537777_oU8S5Luwsdqc5yowLxLYmDX17fHZ2iog.jpg" height="50px"/>
+		<div class="name">ADD EMPLOYEE</div>
+	</div>
+	<div class="box" id="showEmployees">
+		<img class="img" src="http://thumbs.dreamstime.com/x/employee-icon-recruitment-agency-28045879.jpg" height="50px"/>
+		<div class="name">SHOW/EDIT ALL EMPLOYEES</div>
+	</div>
+	<div class="box" id="showEmployee">
+		<img class="img" src="http://cloud.graphicleftovers.com/33285/950060/search-employee-icon.jpg" height="50px"/>
+		<div class="name">SHOW/EDIT ONE EMPLOYEE</div>
+	</div>
+	<div class="box">
+		<img class="img" src="http://image.shutterstock.com/display_pic_with_logo/601885/601885,1302626648,2/stock-vector-concept-diagram-background-global-network-net-communication-icon-people-employee-person-vector-75121981.jpg" height="50px"/>
+		<div class="name">DEPARTMENTS</div>
+	</div>
+	<div class="box">
+		<img class="img" src="http://png-4.findicons.com/files/icons/977/rrze/720/user_employee.png" height="50px"/>
+		<div class="name">ROLES</div>
+	</div>
+	<div class="box">
+		<img class="img" src="http://icons.iconarchive.com/icons/artua/mac/512/Setting-icon.png" height="50px"/>
+		<div class="name">SETTINGS</div>
+	</div>
+	<!--<h5><%= link_to "Show All Employees","/showall" %></h5>
+	<h5><%= link_to "Show Individual Employee","/employeedetails" %></h5>-->
+</body>
+</html>
+

@@ -1,0 +1,2 @@
+module HrmsHelper
+end
