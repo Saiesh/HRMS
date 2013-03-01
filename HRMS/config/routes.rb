@@ -1,13 +1,8 @@
 HRMS::Application.routes.draw do
 
-  resources :hrms
-=begin  
+  resources :hrms do
     get 'showall'
-    post 'editemployee'
-    post 'employeedetails'
-    post 'newemployee'
   end
-=end
   
   root :to => "hrms#home"
 

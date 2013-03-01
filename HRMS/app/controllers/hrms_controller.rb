@@ -72,7 +72,7 @@ class HrmsController < ApplicationController
            id = params[:id]
            @employee = Employee.where(:id => id.to_i).first
            @profile = EmployeeProfile.where(:employees_id => @employee.employees_id.to_i).first
-           @address = @profile.includes(:address).first.address
+           @address = EmployeeProfile.where(:address_id => @profile.address_id).includes(:address).first.address
     end
 
   	@employee["employees_id"] = params[:employees][:employees_id].to_i
@@ -124,8 +124,16 @@ class HrmsController < ApplicationController
     @address.state = params[:employees][:state]
     @address.pincode = params[:employees][:pin]
 
-    @profile.dob = params[:employees][:dob]
+    dd = params[:employees][:"dob(3i)"]
+    mm = params[:employees][:"dob(2i)"]
+    yy = params[:employees][:"dob(1i)"]
+
+    r = (dd + "-" + mm + "-" + yy).to_s
+
+    dob = Date.strptime(r, '%d-%m-%Y')
+
     @profile.employees_id = params[:employees][:employees_id]
+    @profile.dob = dob
 
     if @address.save
       addrId = @address.id
@@ -172,7 +180,7 @@ class HrmsController < ApplicationController
       @employee = Employee.where(:employees_id => empid).first
 
       res1 = Employee.where(:employees_id => @employee.manager_id).first
-      @mname = if !res1.blank? then res1 else "NOT ASSIGNED" end
+      @mname = if !res1.blank? then res1.name else "NOT ASSIGNED" end
 
       res2 = Department.where(:departments_id => @employee.departments_id).first
       @dname = if !res2.blank? then res2.description else "NOT ASSIGNED" end
@@ -190,6 +198,12 @@ class HrmsController < ApplicationController
       respond_to do |format|
         format.html # show.html.erb
       end
+  end
+
+  def addrole
+    respond_to do |format|
+      format.html # addrole.html.erb
+    end
   end
 
 end

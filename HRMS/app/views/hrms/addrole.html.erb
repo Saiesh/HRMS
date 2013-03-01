@@ -1,0 +1,27 @@
+<html>
+<head>
+</head>
+<body>
+<h1>ENTER ROLE DETAILS</h1>
+
+<%= form_tag :action => :create do %>
+	<div class="form_field">
+		<h4>Role ID</h4>
+	    <%= text_field "roles","roles_id", :value => 405%>
+	</div>
+	<div class="form_field">
+		<h4>Role Name</h4>
+	    <%= text_field "roles","name", :value => "Dummy Role"%>
+	<div class="form_field">
+		<h4>Role Description</h4>
+	    <%= text_field "roles","desc", :value => "Dummy role has been assigned"%>
+	</div>
+	<div class="submit_form">
+		<br/><%= submit_tag 'ADD EMPLOYEE'%><br/>
+	</div>
+	<%= hidden_field_tag "operation","new" %>
+<% end %>
+<br/>
+<%= flash[:message] %>
+</body>
+</html>
